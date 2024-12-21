@@ -23,7 +23,7 @@
         getIncident.query();
 
         if (!getIncident.hasNext()) {
-            response.setError(new sn_ws_err.NotFoundError('The incident ' + getIncident[i] + 'is not present in ServiceNow. Please provide a valid value to query'));
+            response.setError(new sn_ws_err.NotFoundError('The incident ' + queryRecords[incid] + ' is not present in ServiceNow. Please provide a valid value to query'));
             response.setStatus(404);
             return;
         } else {
