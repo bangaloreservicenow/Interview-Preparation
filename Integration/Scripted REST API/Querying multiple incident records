@@ -1,1 +1,61 @@
 1) In order to fetch the tags, create a user and add the roles itil,tags_admin and web_service_admin
+
+2)Create a GET resource under a scripted rest api and write the script below
+
+(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    // implement resource here
+    var incidentRecord = [];
+    var allincidentDetails = [];
+    var result = [];
+
+    var queryRecords = request.queryParams.incidentRecords[0].split(',');
+
+    for (var incid = 0; incid < queryRecords.length; incid++) {
+        if (!queryRecords[incid]) {
+            response.setError(new sn_ws_err.NotFoundError('Incident ID is not provided'));
+            response.setStatus(404);
+            return;
+        }
+
+        var getIncident = new GlideRecord('incident');
+        getIncident.addQuery('number', queryRecords[incid]);
+        getIncident.query();
+
+        if (!getIncident.hasNext()) {
+            response.setError(new sn_ws_err.NotFoundError('The incident ' + getIncident[i] + 'is not present in ServiceNow. Please provide a valid value to query'));
+            response.setStatus(404);
+            return;
+        } else {
+            while (getIncident.next()) {
+                var incObj = {};
+                var tagDetails = [];
+
+                incObj.number = getIncident.number;
+                incObj.caller = getIncident.getDisplayValue('caller_id');
+                incObj.shortdescription = getIncident.short_description;
+                incObj.state = getIncident.getDisplayValue('state');
+
+                var incTags = new GlideRecord('label_entry');
+                incTags.addQuery('table_key', getIncident.sys_id);
+                incTags.addQuery('read', 'yes');
+                incTags.query();
+
+                while (incTags.next()) {
+                    tagDetails.push(incTags.getDisplayValue('label'));
+                }
+
+                incObj.tags = tagDetails;
+                result.push(incObj);
+
+                allincidentDetails.push(incObj);
+            }
+
+        }
+
+    }
+
+    response.setStatus(200);
+    response.setBody(result);
+
+})(request, response);
