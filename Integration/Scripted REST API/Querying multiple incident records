@@ -2,6 +2,8 @@
 
 2)Create a GET resource under a scripted rest api and write the script below
 
+Endpoint - https://dev186985.service-now.com/api/1589605/fetch_incident_tag?incidentRecords=INC0009009
+
 (function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 
     // implement resource here
