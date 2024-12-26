@@ -1,0 +1,25 @@
+
+  var result = [
+    {
+      "number": "INC0000060",
+      "short_description": "Unable to connect to email",
+      "caller_id": {
+        "display_value": "Joe Employee",
+        "link": "https://dev186985.service-now.com/api/now/table/sys_user/681ccaf9c0a8016400b98a06818d57c7"
+      }
+   },
+    {
+      "number": "INC0009002",
+      "short_description": "My computer is not detecting the headphone device",
+      "caller_id": {
+        "display_value": "David Miller",
+        "link": "https://dev186985.service-now.com/api/now/table/sys_user/77ad8176731313005754660c4cf6a7de"
+      }
+	}
+  ]
+  
+
+for(var i = 0 ; i < result.length ; i++){
+	gs.print(JSON.stringify(result[i] , null, 4));
+}
+
