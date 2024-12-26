@@ -1,0 +1,10 @@
+var str = "Germany";
+
+var result='';
+
+for(var i=0;i<str.length;i++){
+	result+=str.charAt(i);
+}
+
+gs.print(result);
+
