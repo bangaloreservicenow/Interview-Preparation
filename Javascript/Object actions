@@ -1,0 +1,11 @@
+var str = 
+
+{
+	firstName: "John", 
+    lastName: "Doe", 
+    age: 50, 
+    eyeColor: "blue"
+};
+
+
+gs.print(JSON.stringify(str,null,4));
