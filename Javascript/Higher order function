@@ -44,4 +44,11 @@ var users =
 		return ageCondn.age < 20 ;
 	})));
 
+for(var i = 0 ; i < users.length ; i++){
+		ageSum+=users[i].age;
+	}
+
+	gs.print(ageSum);
+
+
 
