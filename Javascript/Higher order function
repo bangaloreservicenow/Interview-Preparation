@@ -17,3 +17,31 @@ gs.print(getDrinkers);
 var getDrinkers = coffeeLovers.forEach(function(drinkVal){
     gs.print(drinkVal);
 });
+
+
+
+var users =
+
+    [{
+            name: 'John Doe',
+            age: 16
+        },
+        {
+            name: 'Thomas Calls',
+            age: 19
+        },
+        {
+            name: 'Liam Smith',
+            age: 20
+        },
+        {
+            name: 'Jessy Pinkman',
+            age: 18
+        }
+    ];
+
+	gs.print(JSON.stringify(users.filter(function(ageCondn){
+		return ageCondn.age < 20 ;
+	})));
+
+
