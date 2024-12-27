@@ -1,0 +1,19 @@
+var arr = [1,2,3,4]
+
+var arrDouble = arr.map(function(val){
+	return val*2;
+});
+
+gs.print(arrDouble);
+
+var coffeeLovers = ['John Doe', 'Liam Smith', 'Jessy Pinkman'];
+
+var getDrinkers = coffeeLovers.map(function(userValue){
+       return userValue +' today ';
+});
+
+gs.print(getDrinkers);
+
+var getDrinkers = coffeeLovers.forEach(function(drinkVal){
+    gs.print(drinkVal);
+});
