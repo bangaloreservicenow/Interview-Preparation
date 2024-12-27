@@ -52,3 +52,15 @@ for(var i = 0 ; i < users.length ; i++){
 
 
 
+
+var obj = {
+
+	name:"Abhi",
+	title:"Parhi"
+};
+
+gs.print(JSON.stringify(Object.assign(obj,{desc:"testing incident"})));
+gs.print(Object.keys(obj));
+gs.print(Object.values(obj));
+
+
