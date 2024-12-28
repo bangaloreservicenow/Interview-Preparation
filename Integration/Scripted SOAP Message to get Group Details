@@ -1,0 +1,19 @@
+input parameter - group_name
+
+output parameter - other fields (getGroupInfo,getGroupEmail,getGroupManager)
+
+
+getGroupInfo
+
+var grp = request.group_name
+
+	var gr = new GlideRecord('sys_user_group');
+	if(gr.get(grp)){
+		response.getGroupInfo = gr.name;
+		response.getGroupEmail = gr.email;
+		response.getGroupManager = gr.manager.name;
+		
+        response.Results = "Group " + grp + " is found in ServiceNow.";
+	}else{
+		response.Results = "Group " + grp + " is not found in ServiceNow.";
+	}
