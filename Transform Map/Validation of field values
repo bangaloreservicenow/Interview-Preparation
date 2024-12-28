@@ -1,0 +1,13 @@
+Transform Map to validate field values after selecting Run Script Value : -  
+
+To allow only mandatory field validation , choose Only Mapped Fields
+
+
+if(source.short_description.startsWith('Create')){
+      // do something
+	}else{
+		error = true;
+		source.sys_row_error = "Problem should start with Create";
+		source.sys_import_state_comment = "Problem should start with Create";
+		
+	}
