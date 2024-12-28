@@ -1,0 +1,37 @@
+Create a POST message with an endpoint - https://dev186985.service-now.com/api/now/table/${tableName}
+
+Provide content as below : - 
+
+{
+
+"caller_id":"${caller_id}",
+"short_description":"${short_description}",
+"description":"${description}"
+
+}
+
+Content-type - application/json
+
+Provide authentication and same user should be created in other instance. Click on the Auto-generate variables and the same is autopopulated in the related list for Variable Substitution
+
+Click on Test in Related Links to validate if integration is fine or not between both the instances.
+
+Click on the Preview Script usage and provide it in the Business Rules , 
+
+
+before BR : - 
+
+try {
+        var r = new sn_ws.RESTMessageV2('CreateRecord', 'CreateIncident');
+        r.setStringParameterNoEscape('description', current.description);
+        r.setStringParameterNoEscape('tableName', current.getTableName());
+        r.setStringParameterNoEscape('short_description', current.short_description);
+        r.setStringParameterNoEscape('caller_id', current.caller_id);
+        var response = r.execute();
+        var responseBody = response.getBody();
+        var httpStatus = response.getStatusCode();
+
+		    current.work_notes = responseBody;
+   } catch (ex) {
+        var message = ex.message;
+    }
