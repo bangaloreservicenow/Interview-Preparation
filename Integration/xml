@@ -1,0 +1,35 @@
+var request = new sn_ws.RESTMessageV2();
+
+request.setEndpoint('https://dev186985.service-now.com/api/now/table/incident?sysparm_fields=number%2Cstate%2Cshort_description%2Cdescription%2Ccaller_id&sysparm_limit=1');
+
+request.setHttpMethod('GET');
+
+//Eg. UserName="admin", Password="admin" for this code sample.
+var user = '';
+var password = '';
+
+request.setBasicAuth(user,password);
+request.setRequestHeader("Accept","application/xml");
+
+var response = request.execute();
+var xmlString = response.getBody();
+
+var xmlObj = gs.xmlToJSON(xmlString);
+gs.log(JSON.stringify(xmlObj,null,4));
+
+var xmlDoc = new XMLDocument2();
+xmlDoc.parseXML(xmlString);
+
+var nodeText = xmlDoc.getNodeText("/response/result/number");
+
+gs.info(nodeText);
+
+var firstnodeText = xmlDoc.getFirstNode("/response/result");
+
+gs.info(firstnodeText);
+
+
+
+
+
+
