@@ -1,0 +1,18 @@
+Widget : - 
+
+HTML -
+
+<h1>Hello My name is {{data.loggedInUser}}</h1>
+  <h2>My last updated record is {{data.taskRecord}}</h2>
+
+Server Script -
+
+ data.loggedInUser = gs.getUserDisplayName();
+	
+	var userRecord = new GlideRecord('task');
+	userRecord.addQuery('opened_by',gs.getUserID());
+	userRecord.orderByDesc('sys_updated_on');
+	userRecord.query();
+	
+	if(userRecord.next())
+		data.taskRecord = userRecord.getValue('number');
