@@ -1,0 +1,53 @@
+HTML 
+
+<p>Record created are below</p>
+  
+<table>
+  
+  <tr>
+    <th>Number</th>
+    <th>Caller</th>
+    <th>Short Description</th>
+    <th>State</th>
+  </tr>
+  
+  <tr ng-repeat="inc in data.incDetails">
+    <td>{{inc.number}}</td>
+    <td>{{inc.caller}}</td>
+    <td>{{inc.shortDescription}}</td>
+    <td>{{inc.state}}</td>
+    <td><button ng-click="c.action(inc.sys_id)">Open Record</button></td>
+  </tr>
+   
+</table>  
+
+Client Script
+
+c.action = function(id){
+		
+		var url ="?id=form&table=incident&sys_id="+id;
+		window.open(url,'_blank');
+	}
+
+
+Server Side
+
+data.incDetails = [];
+	
+	var incUserRec = new GlideRecord('incident');
+	incUserRec.addEncodedQuery('caller_id='+gs.getUserID());
+	incUserRec.query();
+	
+	while(incUserRec.next()){
+		
+		var incObject = {};
+		
+		incObject.number = incUserRec.number.toString();
+		incObject.caller = incUserRec.getDisplayValue('caller_id');
+		incObject.shortDescription = incUserRec.short_description.toString();
+		incObject.state = incUserRec.getDisplayValue('state');
+		incObject.sys_id = incUserRec.getValue('sys_id');
+
+		
+		data.incDetails.push(incObject);
+	}
