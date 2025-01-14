@@ -1,0 +1,91 @@
+HTML 
+
+<div>
+<!-- your widget template -->
+  <p>Record created are below</p>
+  
+<table>
+  
+  <tr>
+    <th>Number</th>
+    <th>Assignment Group</th>
+    <th>Short Description</th>
+    <th>State</th>
+    <th>Open Record</th>
+    <th>Close Record</th>
+  </tr>
+  
+  <tr ng-repeat="inc in data.incDetails">
+    <td>{{inc.number}}</td>
+    <td>{{inc.assignmentGrp}}</td>
+    <td>{{inc.shortDescription}}</td>
+    <td>{{inc.state}}</td>
+    <td><button ng-click="c.action(inc.sysid,'open')">Open Record</button></td>
+    <td><button ng-click="c.action(inc.sysid,'close')">Close Record</button></td>
+
+  </tr>
+   
+</table>
+</div>
+
+Client Scripts
+
+api.controller=function() {
+  /* widget controller */
+  var c = this;
+
+
+c.action = function(incId,action){
+		if(action=='open'){
+			var url = "?id=form&table=incident&sys_id="+incId;
+			window.open(url,'_blank');
+		}else{
+			c.data.currentIncident = incId;
+			c.server.update().then(function(){
+				c.data.currentIncident = "";
+		});
+	}
+}
+};
+
+Server Side
+
+(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+  
+	var table = $sp.getValue('table');
+	var filter = $sp.getValue('filter');
+	data.title = $sp.getValue('title');
+	data.shortdescription = $sp.getValue('short_description');
+	
+	if(input && input.currentIncident){
+		
+		var incidentObj = new GlideRecord('incident');
+		incidentObj.get(input.currentIncident);
+		incidentObj.state = 6;
+		incidentObj.update();
+		
+	}
+
+	data.incDetails = [];
+	
+	var incUserRec = new GlideRecord(table);
+	incUserRec.addEncodedQuery(filter);
+	incUserRec.query();
+	
+	while(incUserRec.next()){
+		
+		var incObject = {};
+		
+		incObject.number = incUserRec.number.toString();
+		incObject.assignmentGrp = incUserRec.getDisplayValue('assignment_group');
+		incObject.shortDescription = incUserRec.short_description.toString();
+		incObject.state = incUserRec.getDisplayValue('state');
+		incObject.sysid = incUserRec.getValue('sys_id');
+
+		
+		data.incDetails.push(incObject);
+	}
+	
+})();
