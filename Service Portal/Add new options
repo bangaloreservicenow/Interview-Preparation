@@ -1,2 +1,16 @@
 Click on the widget Edit option schema. Add the values required by clicking on the + icon
 Add the values and click on Save.
+
+Navigate to the widget and view the Option schema , it will have these values .
+
+[{"name":"title_color","section":"Presentation","default_value":"red","label":"Title Color","type":"string"},{"name":"short_description_color","section":"Presentation","default_value":"green","label":"Short Description Color","type":"string"}]
+
+HTML -
+
+<h1 style="color:{{data.title_color}}">{{data.title}}</h1>
+<h2 style="color:{{options.short_description_color}}">{{data.shortdescription}}</h2>
+
+Server -
+
+data.title_color = options.title_color;
+  
