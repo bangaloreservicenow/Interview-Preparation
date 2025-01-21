@@ -36,7 +36,7 @@ c.prompt = function(){
 		}
 		
 		c.name="";
-		
+		//Below is the syntax of the open function of the spModal API of ServiceNow. Please refer below link for reference. https://www.servicenow.com/docs/pt-BR/bundle/vancouver-api-reference/page/app-store/dev_portal/API_reference/SPModal/concept/SPModal-API.html
 		spModal.open({
 			title:"Name Details",
 			message:"Please provide your name",
