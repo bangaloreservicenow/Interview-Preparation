@@ -1,0 +1,50 @@
+<button ng-click="c.alert()">Alert</button>
+  <button ng-click="c.confirm()">Confirm</button>
+  <button ng-click="c.prompt()">Prompt</button>
+
+
+
+	c.alert = function(){
+		alert("Alert is populated");
+		spModal.alert('Alert through modal').then(function(){
+			window.location.reload();
+		})
+	}
+	
+	c.confirm = function(){
+		var res = confirm("Confirm is populated");
+		if(res){
+			window.location.reload();
+		}
+		spModal.confirm('Confirm through modal').then(function(answer){
+			if(answer){
+			window.location.reload();
+			}
+		})
+	}
+	
+	c.prompt = function(){
+		var res = prompt("Enter your Name");
+		if(res == "Abhi"){
+			alert('Success');
+		}else{
+			alert('Failure');
+		}
+		
+		c.name="";
+		
+		spModal.open({
+			title:"Name Details",
+			message:"Please provide your name",
+			input:true,
+			value:c.name
+		}).then(function(name){
+			if(name=="Abhi"){
+				alert('Success');
+			}else{
+				alert('Failure');
+			}
+	
+		})
+	}
+};
