@@ -1,0 +1,100 @@
+<div>
+<!-- your widget template -->
+  <h1 style="color:{{data.title_color}}">{{data.title}}</h1>
+  <h2 style="color:{{options.short_description_color}}">{{data.shortdescription}}</h2>
+  
+<table>
+  
+  <tr>
+    <th>Number</th>
+    <th>Assignment Group</th>
+    <th>Short Description</th>
+    <th>State</th>
+    <th>Open Record</th>
+    <th>Close Record</th>
+  </tr>
+  
+  <tr ng-repeat="inc in data.incDetails">
+    <td><a href="?id=form&table=incident&sys_id={{inc.sysid}}" target="_blank">{{inc.number}}</a></td>
+    <td>{{inc.assignmentGrp}}</td>
+    <td>{{inc.shortDescription}}</td>
+    <td>{{inc.state}}</td>
+    <td><button ng-click="c.action(inc.sysid,'open')">Open Record</button></td>
+    <td><button ng-click="c.action(inc.sysid,'close')">Close Record</button></td>
+
+  </tr>
+   
+</table>
+</div>
+
+
+api.controller=function(spModal) {
+  /* widget controller */
+  var c = this;
+
+
+c.action = function(incId,action){
+		if(action=='open'){
+			spModal.open({
+				title:"Record Details",
+				widget:"widget-form",
+				widgetInput:{sys_id:incId,table:c.data.table}
+			}).then(function(){
+				alert('popup close');
+			})
+		}else{
+			
+			spModal.confirm('Do you want to close?').then(function(answer){
+				if(answer){
+					c.data.currentIncident = incId;
+			c.server.update().then(function(){
+				c.data.currentIncident = "";
+		});
+				}
+			})	
+	}
+}
+};
+
+
+(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+  
+	var table = $sp.getValue('table');
+	var filter = $sp.getValue('filter');
+	data.table = table;
+	data.title = $sp.getValue('title');
+	data.shortdescription = $sp.getValue('short_description');
+	data.title_color = options.title_color;
+	
+	if(input && input.currentIncident){
+		
+		var incidentObj = new GlideRecord('incident');
+		incidentObj.get(input.currentIncident);
+		incidentObj.state = 6;
+		incidentObj.update();
+		
+	}
+
+	data.incDetails = [];
+	
+	var incUserRec = new GlideRecord(table);
+	incUserRec.addEncodedQuery(filter);
+	incUserRec.query();
+	
+	while(incUserRec.next()){
+		
+		var incObject = {};
+		
+		incObject.number = incUserRec.number.toString();
+		incObject.assignmentGrp = incUserRec.getDisplayValue('assignment_group');
+		incObject.shortDescription = incUserRec.short_description.toString();
+		incObject.state = incUserRec.getDisplayValue('state');
+		incObject.sysid = incUserRec.getValue('sys_id');
+
+		
+		data.incDetails.push(incObject);
+	}
+	
+})();
