@@ -1,0 +1,32 @@
+data.obj = [];
+	
+	var gr = new GlideRecord('sysapproval_approver');
+	gr.addEncodedQuery('approver=46d96f57a9fe198101947a9620895886^state=requested');
+	gr.query();
+	
+	while(gr.next()){
+		var json = {};
+		json.number = gr.getDisplayValue('document_id');
+		data.obj.push(json);
+	}
+
+
+ c.approve = function(){
+		
+		spUtil.addTrivialMessage("Request Approved");
+	}
+	
+	c.reject = function(){
+		
+		spUtil.addTrivialMessage("Request Rejected");
+	}
+
+
+ <div>
+<!-- your widget template -->
+<div ng-repeat="x in data.obj">
+  <span>{{x.number}}</span>
+  <button class="btn btn-primary" ng-click="c.approve()">Approve</button>
+  <button class="btn btn-danger" ng-click="c.reject()">Reject</button>
+</div>
+</div>
