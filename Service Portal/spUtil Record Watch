@@ -1,0 +1,23 @@
+data.obj = [];
+	
+	var gr = new GlideRecord('sysapproval_approver');
+	gr.addEncodedQuery('approver=97000fcc0a0a0a6e0104ca999f619e5b^sys_created_onONLast 7 days@javascript:gs.beginningOfLast7Days()@javascript:gs.endOfLast7Days()');
+	gr.query();
+	
+	while(gr.next()){
+		var json = {};
+		json.number = gr.getDisplayValue('document_id');
+		data.obj.push(json);
+	}
+
+
+spUtil.recordWatch($scope,"sysapproval_approver","approver=97000fcc0a0a0a6e0104ca999f619e5b^sys_created_onONLast 7 days@javascript:gs.beginningOfLast7Days()@javascript:gs.endOfLast7Days()",function(response){
+		console.log(response.data);
+		c.server.update();
+	});
+
+<div ng-repeat="x in data.obj">
+  <span>{{x.number}}</span>
+  <button class="btn btn-primary" ng-click="c.approve()">Approve</button>
+  <button class="btn btn-danger" ng-click="c.reject()">Reject</button>
+</div>
