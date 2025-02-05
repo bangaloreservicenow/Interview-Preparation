@@ -1,0 +1,33 @@
+<div>
+<!-- your widget template -->
+  My Task Details: <br> <br/>
+  <button type="button" class="btn btn-success" ng-click="setState('inprogress')">In Progress</button><br><br/>
+  <button type="button" class="btn btn-warning" ng-click="setState('closed')">Closed</button>
+</div>
+
+api.controller=function($scope,$rootScope) {
+  /* widget controller */
+  var c = this;
+	
+	$scope.setState = function(state){
+		$rootScope.$broadcast('broadcast1',state);
+	}
+		
+	
+};
+
+
+<div>
+<!-- your widget template -->
+  Below is your task Details:- {{state}}
+</div>
+
+api.controller=function($scope,$rootScope) {
+  /* widget controller */
+  var c = this;
+	
+	//event bellow is the syntax of js listener
+	$rootScope.$on('broadcast1',function(event,data){
+	  $scope.state = data;
+		})
+};
