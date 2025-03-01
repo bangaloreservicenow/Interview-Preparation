@@ -1,0 +1,26 @@
+For city and country , create a OnChange on the country
+
+onChange of the country field :-
+
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (newValue === '') {
+        g_form.clearOptions('u_city');
+    }
+
+    g_form.clearOptions('u_city');
+
+    if (newValue == 'ind') {
+        g_form.addOption('u_city', 'ban', 'Bangalore');
+        g_form.addOption('u_city', 'mum', 'Mumbai');
+        g_form.addOption('u_city', 'pun', 'Pune');
+
+    } else if (newValue == 'aus') {
+        g_form.addOption('u_city', 'mel', 'Melbourne');
+        g_form.addOption('u_city', 'syd', 'Sydney');
+    } else {
+        return;
+    }
+
+    //Type appropriate comment here, and begin script below
+
+}
