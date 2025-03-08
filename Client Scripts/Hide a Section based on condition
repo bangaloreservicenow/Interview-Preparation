@@ -1,0 +1,18 @@
+Hide the Resolution Information field based on state field values
+
+OnChange client Script on the State field for the incident table
+
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   if (!isLoading || newValue === '') {
+	g_form.setSectionDisplay('resolution_information',false);
+      return;
+   }
+
+   if(newValue == 6 || newValue == 7){
+   g_form.setSectionDisplay('resolution_information',true);
+   }else{
+	g_form.setSectionDisplay('resolution_information',false);
+   }
+   //Type appropriate comment here, and begin script below
+   
+}
