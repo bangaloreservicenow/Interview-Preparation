@@ -1,0 +1,11 @@
+List Banner Button type of the UI Action : - 
+
+function checkRecord(){
+	var myCheck = g_list.getChecked();
+	if(myCheck){
+	alert(myCheck);
+	g_list.refresh();
+	}else{
+		alert('Please select any records before proceeding');
+	}
+}
