@@ -1,0 +1,10 @@
+1)Create a scheduled job and call the script includes to fetch the refresh token automatically without having to click the GetOAuth continuously.
+2)generateRefreshToken : function(){
+var oauthCli = new GlideOAuthClient();
+var parameters = {grant_type:"password",username:"demo_oauth",pass:"demo"};
+var jsonParams = new JSON();
+var tokenResponse = oauthCli.requestToken();
+var tokens = tokenResponse.getToken('demo_oauth',jsonParams.encode(parameters));
+
+
+}
