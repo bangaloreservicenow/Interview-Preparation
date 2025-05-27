@@ -7,3 +7,4 @@ if(action=="insert" && (source.u_caller == '' || source.u_short_description == '
 		source.sys_import_state_comment = "Caller ID and Short Description fields are mandatory. Make Sure both are passed";
 	}
 
+
