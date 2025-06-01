@@ -1,0 +1,13 @@
+Use REST API Explorer - 
+
+Email API - 
+
+{"to" : [
+      "xx.xx@xxx.xxx"
+    ],
+    "subject" : "First REST API explorer PDI use",
+    "text" : "Test Message",
+    "html" : "<b>Test Message to check connection</b>",
+    "table_name" : "incident",
+    "table_record_id":"f13991ba83312210f220caa6feaad34a" //sys_id of the incident record for updating record
+  }
