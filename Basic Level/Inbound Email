@@ -11,3 +11,24 @@ Email API -
     "table_name" : "incident",
     "table_record_id":"f13991ba83312210f220caa6feaad34a" 
   }
+
+
+The response would work in this 
+
+{
+  "result": {
+    "id": "6b33ac2b83b12210f220caa6feaad38a",
+    "links": [
+      {
+        "rel": "self",
+        "href": "/now/v1/email/6b33ac2b83b12210f220caa6feaad38a"
+      },
+      {
+        "rel": "status",
+        "href": "/now/v1/email/6b33ac2b83b12210f220caa6feaad38a?sysparm_fields=id,type,state,error"
+      }
+    ]
+  }
+}
+
+Navigate to the sys_email and use sys_id is sys_id response which we got after running it.
