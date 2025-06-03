@@ -9,5 +9,5 @@ Email API -
     "text" : "Test Message",
     "html" : "<b>Test Message to check connection</b>",
     "table_name" : "incident",
-    "table_record_id":"f13991ba83312210f220caa6feaad34a" //sys_id of the incident record for updating record
+    "table_record_id":"f13991ba83312210f220caa6feaad34a" 
   }
