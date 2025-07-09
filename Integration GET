@@ -1,0 +1,11 @@
+Parent REST Message endpoint - https://dev{}.service-now.com/api
+GET Method under Parent REST Message - https://dev284558.service-now.com/api/now/table/incident?sysparm_query=active=true&sysparm_fields=number,short_description,priority&sysparm_limit=5
+
+Limit can be provided any number using sysparm_limit, also the fields can be separated using comma separation. 
+
+Click on Test button to fetch the response
+
+Parameters - sysparm_query=active=true&sysparm_fields
+
+Response - {"result":[{"number":"INC0010025","short_description":"as","priority":"5"},{"number":"INC0008001","short_description":"ATF:TEST2","priority":"5"},{"number":"INC0010021","short_description":"asdf","priority":"5"},{"number":"INC0010007","short_description":"asdf","priority":"5"},{"number":"INC0010014","short_description":"jh","priority":"5"}]}
+
