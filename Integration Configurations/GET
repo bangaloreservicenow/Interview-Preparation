@@ -1,5 +1,5 @@
 Parent REST Message endpoint - https://dev{}.service-now.com/api
-GET Method under Parent REST Message - https://dev284558.service-now.com/api/now/table/incident?sysparm_query=active=true&sysparm_fields=number,short_description,priority&sysparm_limit=5
+GET Method endpoint under Parent REST Message - https://dev{}.service-now.com/api/now/table/incident?sysparm_query=active=true&sysparm_fields=number,short_description,priority&sysparm_limit=5
 
 Limit can be provided any number using sysparm_limit, also the fields can be separated using comma separation. 
 
