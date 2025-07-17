@@ -6,9 +6,9 @@ link/oauth/application
 
 Create a new record in the Application Registry and provide the required details.
 
-Authorize URL - https://dev186985.service-now.com/oauth/authorize
-Token URL - https://dev186985.service-now.com/oauth/token
-Redirect URL - https://dev186985.service-now.com/oauth_redirect.do
+Authorize URL - https://{}.service-now.com/oauth/authorize
+Token URL - https://{}.service-now.com/oauth/token
+Redirect URL - https://{}.service-now.com/oauth_redirect.do
 Default Grant Type - Authorization Code
 Send Credentials - As Basic Authorization Header
 
