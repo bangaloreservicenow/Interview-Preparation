@@ -1,0 +1,37 @@
+{
+"u_number":"${u_number}",
+"u_state":"${u_state}",
+"u_correlationid":"${u_correlationid}"
+}
+
+
+POST - 
+
+Accept - application/json
+Content-Type - application/json
+
+Endpoint -
+
+https://{}.service-now.com/api/now/v2/table/u_storecasedetails
+
+var id = GlideGuid.generate(null);
+current.u_correlation_id = id;
+
+try { 
+ var r = new sn_ws.RESTMessageV2('Send Case Details', 'Send Case Details');
+ r.setStringParameterNoEscape('u_correlationid', current.u_correlation_id);
+ r.setStringParameterNoEscape('u_state', current.u_case_state);
+ r.setStringParameterNoEscape('u_number', current.u_number);
+
+ var response = r.execute();
+ var responseBody = response.getBody();
+ var httpStatus = response.getStatusCode();
+ current.u_requestbody = r.getRequestBody();
+ current.u_response_body = responseBody;
+
+ if(httpStatus == 201){
+	current.u_external_status = "1";
+ }
+
+}
+
