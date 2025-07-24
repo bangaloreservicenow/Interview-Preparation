@@ -1,0 +1,47 @@
+var tablesToExport = ['incident','problem'];
+
+for (var i = 0; i < tablesToExport.length; i++) {
+    
+	var tableName = tablesToExport[i];
+
+    
+    var gr = new GlideRecord(tableName);
+    gr.query();
+
+    
+    var xmlDoc = new XMLDocument();
+    xmlDoc.createElement(tableName + 's'); // Root element
+
+    
+    while (gr.next()) {
+        var recordNode = xmlDoc.createElement(tableName);
+
+        
+        var fields = gr.getFields();
+            for (var j = 0; j < fields.size(); j++) {
+                var field = fields.get(j);
+                var fieldName = field.getName();
+                var fieldValue = gr.getValue(fieldName);
+                var fieldNode = xmlDoc.createElement(fieldName);
+                fieldNode.setTextContent(fieldValue);
+                recordNode.appendChild(fieldNode);
+            } // end for
+
+        xmlDoc.appendChild(recordNode);
+    } 
+}
+
+// set all the XML to a var and write to a file in a task
+var xmlContent = xmlDoc.toString();
+var fileDateTime = new GlideDateTime();
+
+var grRec = new GlideRecord("incident"); 
+grRec.addQuery("sys_id","968f7b67c332221028bbbe13e401315a"); 
+grRec.query();
+if(grRec.next()){
+    var grAttachment = new GlideSysAttachment();
+    grAttachment.write(grRec, 'Agile_Backup - ' + fileDateTime + '.xml', 'application/xml',xmlContent);
+} // end if next record
+
+// Log the export details
+gs.info('Exported ' + gr.getRowCount() + ' records from ' + tableName + ' to .XML ');
