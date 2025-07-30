@@ -1,0 +1,7 @@
+else if(newValue == 'email' && g_form.getValue('category')== 'hardware'){
+	g_form.clearOptions('subcategory');
+	g_form.addOption('subcategory','cpu','CPU');
+	g_form.addOption('subcategory','disk','Disk');
+	g_form.addOption('subcategory','monitor','Monitor');
+	g_form.addOption('subcategory','mouse','Mouse');
+	
