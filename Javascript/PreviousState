@@ -1,0 +1,34 @@
+Uncheck client
+
+Condition - current.isValidRecord() && !current.isNewRecord() && current.state != 6 
+
+// Revert Incident State to last committed value
+
+var previousState = null;
+
+// Get last audited State value
+var auditGR = new GlideRecord('sys_audit');
+auditGR.addQuery('documentkey', current.sys_id);
+auditGR.addQuery('fieldname', 'state');
+auditGR.orderByDesc('sys_created_on');
+auditGR.setLimit(1);
+auditGR.query();
+
+if (auditGR.next()) {
+    previousState = auditGR.getValue('oldvalue');
+}
+
+// Validate and revert
+if (previousState !== null && !isNaN(previousState)) {
+
+    // State is an integer choice field
+    current.setValue('state', parseInt(previousState, 10));
+
+    // Prevent unwanted side effects
+    current.setWorkflow(false);
+    current.autoSysFields(false);
+
+    current.update();
+}
+
+action.setRedirectURL(current);
