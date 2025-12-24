@@ -7,3 +7,10 @@ function onCellEdit(sysIDs, table, oldValues, newValue, callback) {
 
  callback(saveAndClose); 
 }
+
+function onCellEdit(sysIDs, table, oldValues, newValue, callback) {
+
+ alert('Updating caller field in list view is restricted.');
+
+ callback(false); 
+}
