@@ -1,0 +1,14 @@
+(function(){
+
+var inc = new GlideAggregate('incident');
+inc.addAggregate('COUNT');
+inc.groupBy('state');
+inc.query();
+
+while(inc.next()){
+	var state = inc.getDisplayValue('state');
+	var count = inc.getAggregate('COUNT');
+    gs.print('Total count of state ' + state + ' is ' + count);
+}
+
+})();
