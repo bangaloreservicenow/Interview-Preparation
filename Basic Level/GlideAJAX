@@ -1,0 +1,24 @@
+CS - 
+
+Synchronous (better to user the callback as provided below)
+
+var grCaller = new GlideAjax('UserInfo_SI');
+    grCaller.addParam('sysparm_name', 'getAsyncCaller');
+    grCaller.addParam('sysparm_caller', newValue);
+	
+    grCaller.getXMLAnswer(function(response){
+    g_form.setValue('short_description', response);
+
+	});
+
+SI - 
+getAsyncCaller: function() {
+
+        var userRec = this.getParameter('sysparm_caller');
+
+        var user = new GlideRecord('sys_user');
+		user.get(userRec);
+		
+		return user.email.toString();
+
+    },
