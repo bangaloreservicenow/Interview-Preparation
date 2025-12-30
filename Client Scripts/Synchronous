@@ -1,0 +1,27 @@
+Client Scripts - 
+
+ var callerObj = new GlideAjax('UserFlags');
+   callerObj.addParam('sysparm_name','isVIP');
+   callerObj.addParam('sysparm_caller',g_form.getValue('caller_id'));
+   callerObj.getXMLAnswer(function(response){
+
+	var resultfromServer = response;
+	g_form.setValue('description',resultfromServer);
+   });
+
+
+Script Includes - 
+
+isVIP : function(){
+
+var vipcaller = this.getParameter('sysparm_caller');
+
+var user = new GlideRecord('sys_user');
+user.get(vipcaller);
+
+if(user.vip == true)
+return "checked";
+else
+return "unchecked";
+
+},
