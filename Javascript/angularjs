@@ -1,0 +1,25 @@
+<button ng-click="c.open()">Refresh</button>
+  <button ng-click="c.confirm()">Confirm</button>
+  <button ng-click="c.prompt()">Prompt</button>
+
+c.open = function(){
+		spModal.alert('Open incident').then(function(){
+			window.location.reload();
+	  });
+	}
+	
+	c.confirm = function(){
+		spModal.confirm('Provide Value').then(function(answer){
+			if(answer){
+			window.location.reload();
+			}
+		});
+	}
+	
+	c.prompt = function(){
+		spModal.prompt('Please provide your name').then(function(answer){
+			if(answer){
+				window.location.reload();
+			}
+		});
+	}
